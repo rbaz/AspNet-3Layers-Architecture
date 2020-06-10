@@ -1,0 +1,58 @@
+﻿@model HDBellData.ViewModels.TicketEditViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Ticket</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ProjectName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TDateCreation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TDateCreation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProjectName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProjectName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProjectName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TDescription)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.TicketId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

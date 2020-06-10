@@ -1,0 +1,111 @@
+﻿@model HDBellData.ViewModels.TicketEditViewModel
+
+@{
+    ViewBag.Title = "Edit1";
+}
+
+<h2>Edit1</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>TicketEditViewModel</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.TicketId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TicketId, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TicketId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TDateCreation, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TDateCreation, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TDateCreation, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TDescription, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TDescription, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TDescription, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ProjectName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ProjectName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ProjectName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SelectedDepartmentCode, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(Model => Model.SelectedDepartmentCode, new SelectList(Model.Departments, "Value", "Text", Model.SelectedDepartmentCode), htmlAttributes: new { @class = "form-control", @id = "DepartmentDropdown" })  @*, @onchange = "callChangefunc(this.value)"*@
+                @Html.ValidationMessageFor(model => model.SelectedDepartmentCode, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SelectedEmployeeCode, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(Model => Model.SelectedEmployeeCode, new SelectList(Model.Employees, "Value", "Text", Model.SelectedEmployeeCode), htmlAttributes: new { @class = "form-control", @id = "EmployeeDropdown" })
+                @Html.ValidationMessageFor(model => model.SelectedEmployeeCode, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+
+        $(document).ready(
+            (function () {
+                @*$("#EmployeeDropDown").find("@Model.SelectedEmployeeCode").value();*@
+                $("#EmployeeDropDown").val("@Model.SelectedEmployeeCode");
+            }));
+
+        $('#DepartmentDropdown').change(function () {
+            var selectedDepartment = $("#DepartmentDropdown").val();
+            var employeesSelect = $('#EmployeeDropdown');
+                employeesSelect.empty();
+                if (selectedDepartment != null && selectedDepartment != '') {
+                    $.getJSON('@Url.Action("GetEmployeeByDepartment")', { departmentId: selectedDepartment }, function (employees) {
+                        if (employees != null && !jQuery.isEmptyObject(employees))
+                        {
+                            employeesSelect.append($('<option/>', {
+                                value: null,
+                                text: ""
+                            }));
+                            $.each(employees, function (index, employee) {
+                                employeesSelect.append($('<option/>', {
+                                    value: employee.value,
+                                    text: employee.Text                                    
+                                }));
+                            });
+                        };
+                    });
+                }
+            });
+    </script>
+}

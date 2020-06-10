@@ -1,0 +1,47 @@
+﻿@model HDBellData.Models.Employee
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(model => model.)
+    <p><b>Employee Name:</b>@Html.EditorFor(model => model.Name)</p>
+    <p><b>Deparment :</b>@Html.EditorFor(model => model.DepartmentId)</p>    
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Department</th>
+            <th></th>
+        </tr>
+        @{ int i = 0;}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.EditorFor(model => item.Name, new { htmlAttributes = new { @Name = "[" + i + "].Name" } })</td>
+                @*<td>@Html.EditorFor(model => item.Department, new { htmlAttributes = new { @Name = "[" + i + "].Credit" } })</td>*@
+                <td>@Html.HiddenFor(model => item.DepartmentId, new { @Name = "[" + i + "].DepartmentId" })
+                <input type="button" value="Remove" class="remove" /></td>
+            </tr>
+            i++;
+        }
+    </table>
+    <input type="submit" id="submit" />
+}
+@section scripts{
+    <script>
+        var stuDetailIDs = Array();
+        $(".remove").click(function () {
+            stuDetailIDs.push($(this).prev().val());
+            $(this).parent().parent().remove();
+        })
+        $("#submit").click(function () {
+            $.ajax({
+                url: '/Test/DeleteDetail',
+                method: 'POST',
+                data: { stuDetailIDs: stuDetailIDs },
+                success: function (data) {
+                    alert(data);
+                }
+            })
+            $("form").submit();
+        })
+        //When we submit the form, the delete operation will be saved to database.
+    </script>
+}

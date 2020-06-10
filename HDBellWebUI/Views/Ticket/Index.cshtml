@@ -1,0 +1,68 @@
+﻿@model IEnumerable<HDBellData.ViewModels.TicketDisplayViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+@using (Html.BeginForm("Index", "Ticket", FormMethod.Get))
+{
+    @Html.AntiForgeryToken()
+    <table class="table">
+        <tr>
+            <th>
+                @Html.TextBox("Search_ProjectName", ViewBag.Search_ProjectName as string)                
+            </th>
+            <th>
+                @Html.TextBox("Search_EmployeeName", ViewBag.FilterValue as string)
+            </th>
+            <th>
+                @Html.TextBox("Search_Description", ViewBag.FilterValue as string)
+            </th>
+            <th>
+                <input type="submit" value="Apply filter" onclick="index"/>
+            </th>
+
+        </tr>
+
+        <tr>
+            <th style="text-align:left">                
+                @Html.ActionLink(HDBellWebUI.App_LocalResources.ResTicket.ProjectName, "Index", new { Sorting_Order = ViewBag.SortingProjectName })
+            </th>
+            <th>
+                @Html.ActionLink(HDBellWebUI.App_LocalResources.ResTicket.EmployeeName, "Index", new { Sorting_Order = ViewBag.SortingEmployeeName })
+            </th>
+            <th>                
+                @Html.ActionLink(HDBellWebUI.App_LocalResources.ResTicket.Description, "Index", new { Sorting_Order = ViewBag.SortingDescription })
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProjectName)
+                </td>                
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TDescription)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.TicketId }) |
+                    @Html.ActionLink("EditTicket", "EditTicket", new { id = item.TicketId }) |
+                    @*@Html.ActionLink("Details", "Details", new { id = item.TicketId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.TicketId })*@
+                </td>
+            </tr>
+        }
+
+    </table>
+}
