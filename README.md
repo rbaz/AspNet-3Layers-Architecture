@@ -3,7 +3,7 @@
 
 
 Asp Net MVC
-This is a demo, to implements a web api in 3 layers with C# (dotnet) and Entity Framework using Repository patern and SQL Server 2017 Database.
+This is a demo, to implements a web api in 3 layers with C# (dotnet) and Entity Framework using Repository pattern and SQL Server 2017 Database.
 
 # Architecture (Layers)
 .Service - Layer responsible for responsible for business rules.
