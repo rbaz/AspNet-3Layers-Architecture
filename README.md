@@ -21,7 +21,7 @@ dotnet ef database update
 
 Run
 
-# After preparing your database and your connection string ( HDBellData/HDBellContext.cs ), follow the steps:
+After preparing your database and your connection string ( HDBellData/HDBellContext.cs ), follow the steps:
 
 dotnet restore
 
