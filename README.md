@@ -2,8 +2,10 @@
  Asp.Net 3Layers Architecture with a cascading dropdownlist
 
 
-Asp Net MVC
-This is a demo, to implements a web api in 3 layers with C# (dotnet) and Entity Framework using Repository pattern and SQL Server 2017 Database.
+# Asp Net MVVM
+This is a demo, to implements a web api in 3 layers with C# (dotnet) and Entity Framework using Repository pattern and SQL Server 2017 Database. 
+I implement too in in the frontend a cascading DropdownList using jQuey/JavaScrip.
+
 
 # Architecture (Layers)
 .Service - Layer responsible for responsible for business rules.
