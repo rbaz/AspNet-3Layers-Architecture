@@ -16,13 +16,19 @@ I implement too in in the frontend a cascading DropdownList using jQuey/JavaScri
 
 # Run Migrations
 cd HDBellData
+
 dotnet ef database update
+
 Run
-After preparing your database and your connection string ( HDBellData/HDBellContext.cs ), follow the steps:
+
+# After preparing your database and your connection string ( HDBellData/HDBellContext.cs ), follow the steps:
 
 dotnet restore
+
 cd HDBellWeb
+
 dotnet run
+
 Application is listening on http://localhost:54434/  or its depend on your machine.
 
 
